@@ -1,0 +1,28 @@
+trigger:
+- main
+
+parameters:
+  - name: environment
+    type: string
+    values:
+      - test
+      - dev
+      - prod
+
+variables:
+  - vmImageName: 'ubuntu-latest'
+  - resourceGroupName: '${parameters.environment}-rg-dl'
+  - subscriptionId: ${parameters.subscriptionId}
+  - location: 'westeurope'
+  - templateFile: 'main.bicep'
+
+pool:
+  vmImage: '$(vmImageName)'
+
+steps:
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Subscription'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: '$(resourceGroupName)'
+    location: '$(location)'

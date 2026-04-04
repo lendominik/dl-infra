@@ -4,17 +4,24 @@ trigger:
 parameters:
   - name: environment
     type: string
+    default: dev
     values:
       - test
       - dev
       - prod
+  - name: subscriptionId
+    type: string
+    default: ''
 
 variables:
-  - vmImageName: 'ubuntu-latest'
-  - resourceGroupName: '${parameters.environment}-rg-dl'
-  - subscriptionId: ${parameters.subscriptionId}
-  - location: 'westeurope'
-  - templateFile: 'main.bicep'
+  - name: vmImageName
+    value: 'ubuntu-latest'
+  - name: resourceGroupName
+    value: '${{ parameters.environment }}-rg-dl'
+  - name: location
+    value: 'westeurope'
+  - name: templateFile
+    value: '$(Build.SourcesDirectory)/main.bicep'
 
 pool:
   vmImage: '$(vmImageName)'

@@ -13,6 +13,7 @@ param resourceGroupName string
 
 var tags = {
     Environment: environment
+    CreatedBy: 'Bicep'
 }
 
 resource resourceGroup 'Microsoft.Resources/resourceGroups@2025-04-01' = {

@@ -5,31 +5,24 @@ parameters:
   - name: environment
     type: string
     default: dev
-    values:
-      - test
-      - dev
-      - prod
-  - name: subscriptionId
-    type: string
-    default: ''
+    values: [test, dev, prod]
 
 variables:
-  - name: vmImageName
-    value: 'ubuntu-latest'
   - name: resourceGroupName
     value: '${{ parameters.environment }}-rg-dl'
   - name: location
     value: 'westeurope'
-  - name: templateFile
-    value: '$(Build.SourcesDirectory)/main.bicep'
 
 pool:
-  vmImage: '$(vmImageName)'
+  vmImage: 'ubuntu-latest'
 
 steps:
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
-    deploymentScope: 'Subscription'
+    azureResourceManagerConnection: 'Azure-Sub-Conn'
     action: 'Create Or Update Resource Group'
     resourceGroupName: '$(resourceGroupName)'
     location: '$(location)'
+    templateLocation: 'Linked artifact'
+    csmFile: '$(Build.SourcesDirectory)/main.bicep'
+    deploymentMode: 'Incremental'

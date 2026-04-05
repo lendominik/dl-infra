@@ -5,16 +5,20 @@ targetScope = 'subscription'
 param environment string = 'dev'
 
 @description('The location where the resource group will be created.')
-@maxLength(30)
 @minLength(1)
+@maxLength(30)
 param location string = 'westeurope'
 
 @description('The name of the resource group.')
-@maxLength(30)
 @minLength(1)
+@maxLength(30)
 param resourceGroupName string
 
-var appName = 'dl'
+@description('The name of the application. For example: "myapp".')
+@minLength(1)
+@maxLength(20)
+param appName string
+
 var prefix = '${environment}-${appName}'
 
 var appServiceName = '${prefix}-appservice'

@@ -14,6 +14,11 @@ param location string = 'westeurope'
 @minLength(1)
 param resourceGroupName string
 
+var appName = 'dl'
+var prefix = '${environment}-${appName}'
+
+var appServiceName = '${prefix}-appservice'
+
 var tags = {
     Environment: environment
     CreatedBy: 'Bicep'
@@ -25,3 +30,10 @@ resource resourceGroup 'Microsoft.Resources/resourceGroups@2025-04-01' = {
   tags: tags
 }
 
+module appServiceModule 'modules/app-service.bicep' = {
+  name: 'appServiceDeployment'
+  scope: resourceGroup
+  params: {
+    appServiceName: appServiceName
+  }
+}

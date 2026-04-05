@@ -1,5 +1,5 @@
 @description('The name of the App Service to create. For example: "myappservice"')
-param appServiceName string = 'dlappservice'
+param appServiceName string
 
 @description('The location where the App Service Plan and App Service will be deployed. For example: "eastus", "westus2", etc.')
 param location string = 'westeurope'

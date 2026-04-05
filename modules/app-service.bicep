@@ -42,6 +42,7 @@ resource appService 'Microsoft.Web/sites@2025-03-01' = {
   }
 }
 
+// it will be updated in the future to use deployment slots and deployment pipelines, but for now we will use manual integration with GitHub repository
 resource sourceControls 'Microsoft.Web/sites/sourcecontrols@2025-03-01' = {
   parent: appService
   name: 'web'

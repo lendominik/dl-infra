@@ -53,5 +53,8 @@ resource sourceControls 'Microsoft.Web/sites/sourcecontrols@2025-03-01' = {
   }
 }
 
+@description('The ID of the deployed App Service.')
 output appServiceId string = appService.id
+
+@description('The ID of the deployed App Service Plan.')
 output appServicePlanId string = appServicePlan.id

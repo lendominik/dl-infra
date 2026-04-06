@@ -38,5 +38,8 @@ module appServiceModule 'modules/app-service.bicep' = {
   }
 }
 
+@description('The ID of the deployed App Service.')
 output appServiceId string = appServiceModule.outputs.appServiceId
+
+@description('The ID of the deployed App Service Plan.')
 output appServicePlanId string = appServiceModule.outputs.appServicePlanId

@@ -1,3 +1,5 @@
+import { sharedPrefix } from './shared.bicep'
+
 targetScope = 'subscription'
 
 @description('The environment for the deployment. Allowed values are: test, dev, prod.')
@@ -14,12 +16,7 @@ param location string = 'westeurope'
 @maxLength(30)
 param resourceGroupName string
 
-@description('The name of the application. For example: "myapp".')
-@minLength(1)
-@maxLength(20)
-param appName string
-
-var prefix = '${environment}-${appName}'
+var prefix = '${sharedPrefix}-${environment}'
 
 var appServiceName = '${prefix}-appservice'
 

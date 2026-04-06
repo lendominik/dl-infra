@@ -8,7 +8,7 @@ param location string = 'westeurope'
 param sku string = 'B1'
 
 @description('The Linux FX version to use for the App Service. For example: "NODE|14-lts" or "DOTNETCORE|3.1"')
-param linuxFxVersion string = 'DOTNETCORE|3.1'
+param linuxFxVersion string = 'DOTNETCORE|8.0'
 
 @description('The URL of the Git repository containing the application code.')
 param repositoryUrl string = 'https://github.com/Azure-Samples/dotnetcore-docs-hello-world'

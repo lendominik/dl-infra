@@ -2,18 +2,18 @@ import * as shared from './shared.bicep'
 
 targetScope = 'subscription'
 
-@description('The environment for the deployment. Allowed values are: test, dev, prod.')
+@description('Required. Name of the environment to deploy.')
 param environment shared.Environment = 'dev'
 
-@description('The location where the resource group will be created.')
-@minLength(1)
-@maxLength(30)  
-param location string = 'westeurope'
-
-@description('The name of the resource group.')
+@description('Required. The name of the resource group.')
 @minLength(1)
 @maxLength(30)
 param resourceGroupName string
+
+@description('Optional. Location of all resources.')
+@minLength(1)
+@maxLength(30)  
+param location string = 'westeurope'
 
 var prefix = '${shared.sharedPrefix}-${environment}'
 
@@ -37,3 +37,6 @@ module appServiceModule 'modules/app-service.bicep' = {
     appServiceName: appServiceName
   }
 }
+
+output appServiceId string = appServiceModule.outputs.appServiceId
+output appServicePlanId string = appServiceModule.outputs.appServicePlanId

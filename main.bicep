@@ -1,14 +1,13 @@
-import { sharedPrefix } from './shared.bicep'
+import * as shared from './shared.bicep'
 
 targetScope = 'subscription'
 
 @description('The environment for the deployment. Allowed values are: test, dev, prod.')
-@allowed(['test', 'dev', 'prod'])
-param environment string = 'dev'
+param environment shared.Environment = 'dev'
 
 @description('The location where the resource group will be created.')
 @minLength(1)
-@maxLength(30)
+@maxLength(30)  
 param location string = 'westeurope'
 
 @description('The name of the resource group.')
@@ -16,7 +15,7 @@ param location string = 'westeurope'
 @maxLength(30)
 param resourceGroupName string
 
-var prefix = '${sharedPrefix}-${environment}'
+var prefix = '${shared.sharedPrefix}-${environment}'
 
 var appServiceName = '${prefix}-appservice'
 
